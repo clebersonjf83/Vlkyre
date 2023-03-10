@@ -5,12 +5,12 @@ const yargs = require("yargs");
 const { join } = require("path");
 const { say } = require("cfonts");
 const ascii = require("ascii-table");
+const mFolders = fs.readdirSync("./models");
 const { createInterface } = require("readline");
-const { setupMaster, fork } = require("cluster");
 const { watchFile, unwatchFile } = require("fs");
+const { setupMaster, fork } = require("cluster");
 const rl = createInterface(process.stdin, process.stdout);
 const Table = new ascii().setHeading("✭CATEGORY✭", "✭COMMANDS✭");
-const mFolders = fs.readdirSync("./models");
 
 say("VLKYRE BOT\nWhatsApp Multi Device", {
   font: "chrome",
@@ -44,8 +44,6 @@ function showCommands(path) {
         cL.bgGreen(cL.black("> " + cFolders)),
         cL.yellow("  | " + cFiles)
       );
-      Table.addRow("> " + cFolders, cFiles);
-      console.log(Table.toString());
     } else if (cFolders === "⭕YTFilter") {
       console.log(
         cL.bgGreen(cL.black("> " + cFolders)),
@@ -145,7 +143,7 @@ function ignite(cFile) {
   });
   p.on("exit", (_, code) => {
     isRunning = false;
-    console.log(cL.bgRed("❌ An unexpected error occurred:"), cL.red(error));
+    console.error(cL.bgRed("❌ An unexpected error occurred:" + _));
     p.process.kill();
     isRunning = false;
     ignite.apply(this, arguments);
@@ -165,4 +163,5 @@ function ignite(cFile) {
       });
 }
 
-showCommands("models").then(ignite("index.js", "uptime"));
+showCommands("models");
+ignite("index.js", "uptime");

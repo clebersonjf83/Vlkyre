@@ -11,10 +11,10 @@
 // ║ In short, Fork At Your Own Risk.
 // ╚════════════╝
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     νℓкуяє
@@ -28,17 +28,15 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
         },
       })
       .then(async (response) => {
-        const mData = response.data[0];
+        var mData = response.data;
         console.log(mData);
         return await νℓкуяє.imgB(
           νℓкуяє,
           νℓкhat,
           `*🔖Here, ${pfname} For ${νℓкуяє.pushname || νℓкуяє.Tname}:*
-*_topic*: ${mData._topic}
-*_query*: ${mData._query}
-
-> *Api Fetch Url:* https://magneum.vercel.app/api/sfw`,
-          mData._url
+*Topic*: ${mData.meta.topic}
+*Query*: ${mData.meta.query}`,
+          mData.meta.url
         );
       });
     ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");

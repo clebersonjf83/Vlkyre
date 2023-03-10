@@ -13,10 +13,10 @@
 ╚════════════╝
 */
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     let Item;

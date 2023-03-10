@@ -11,10 +11,10 @@
 // ║ In short, Fork At Your Own Risk.
 // ╚════════════╝
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     if (!νℓкуяє.args) {
@@ -47,19 +47,17 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
         },
       })
       .then(async (response) => {
-        const mData = response.data[0];
+        var mData = response.data;
         console.log(mData);
-        var _download =
-          mData._links[Math.floor(Math.random() * mData._links.length)];
+        var download =
+          mData.meta.links[Math.floor(Math.random() * mData.meta.links.length)];
         return await νℓкуяє.imgB(
           νℓкуяє,
           νℓкhat,
           `*🔖Here, ${pfname} For ${νℓкуяє.pushname || νℓкуяє.Tname}:*
-*_topic*: ${mData._topic}
-*_query*: ${mData._query}
-
-*_download*: ${_download}`,
-          _download
+*Topic*: ${mData.meta.topic}
+*Query*: ${mData.meta.query}`,
+          download
         );
       });
     ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");

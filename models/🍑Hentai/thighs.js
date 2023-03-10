@@ -11,10 +11,10 @@
 // ║ In short, Fork At Your Own Risk.
 // ╚════════════╝
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     return await νℓкуяє.nsfwCheck.findOne(
@@ -47,11 +47,25 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
                 "accept-language": "en-US,en;q=0.9",
                 "content-type":
                   "application/x-www-form-urlencoded; charset=UTF-8",
+                "user-agent": [
+                  "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 YaBrowser/19.10.3.281 Yowser/2.5 Safari/537.36",
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.53",
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.30",
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36",
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36",
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36",
+                  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
+                  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+                  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36",
+                  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36",
+                ],
               },
             })
             .then(async (response) => {
               var mData = response.data;
-              if (mData[0].URL) {
+              console.log(mData);
+              if (!mData[0].meta.url) {
                 await νℓкуяє.sendMessage(νℓкhat.chat, {
                   react: {
                     text: "❌",
@@ -64,17 +78,16 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
 *❌ Error* 
 > There has been an API Error. Please try again later.`
                 );
-              } else {
+              } else
                 await νℓкуяє.imgB(
                   νℓкуяє,
                   νℓкhat,
                   `*🔖Here, ${pfname} For ${νℓкуяє.pushname}:*
 
-> *Description:* ${mData[0].DESCRIPTION}
+> *Description:* ${mData[0].meta.description}
 > *Api Fetch Url:* https://magneum.vercel.app/api/hentai`,
-                  mData[0].URL
+                  mData[0].meta.url
                 );
-              }
             });
         }
       }

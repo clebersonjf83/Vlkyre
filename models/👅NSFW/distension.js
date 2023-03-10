@@ -11,10 +11,10 @@
 // ║ In short, Fork At Your Own Risk.
 // ╚════════════╝
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     return await νℓкуяє.nsfwCheck.findOne(
@@ -42,7 +42,7 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
           νℓкуяє
             .axios({
               method: "get",
-              url: "https://magneum.vercel.app/api/youtube_sr?q=" + pfname,
+              url: "https://magneum.vercel.app/api/nsfw?q=" + pfname,
               headers: {
                 accept: "*/*",
                 "accept-language": "en-US,en;q=0.9",
@@ -51,36 +51,9 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
               },
             })
             .then(async (response) => {
-              var mData = response.data[0];
-              if (
-                mData._thumbnail.endsWith(".png") &&
-                mData._thumbnail.endsWith(".jpg") &&
-                mData._thumbnail.endsWith(".jpeg")
-              ) {
-                await νℓкуяє.imgB(
-                  νℓкуяє,
-                  νℓкhat,
-                  `*🔖Here, ${pfname} For @${νℓкуяє.Tname || νℓкуяє.pushname}:*
-
-╔══☰ *❗ADULT❗*
-║⦁ 💡Title: ${mData._title || null}
-║⦁ 🖊️Author: ${mData._author || null}
-║⦁ ❣️Topic: ${mData._topic || null}
-╚══☰
-╔══☰
-║>  *❓META INFO❓*
-║⦁ 🎊Status: ${mData._status || null}
-║⦁ 🔐Uuid: ${mData._uuid || null}
-║⦁ 🗓️Date_create: ${mData._date_create || null}
-║⦁ 🧀Query: ${mData._query || null}
-║⦁ 🔗Url: ${mData._url || null}
-║⦁ 📢Domain: ${mData._domain || null}
-║⦁ 💯Sub_reddit_id: ${mData._sub_reddit_id || null}
-║⦁ 🌐Web_link: ${mData._web_link || null}
-╚═══════⋑`,
-                  mData._thumbnail
-                );
-              } else {
+              var mData = response.data;
+              console.log(mData);
+              if (!mData.meta.thumbnail) {
                 await νℓкуяє.sendMessage(νℓкhat.chat, {
                   react: {
                     text: "❌",
@@ -90,7 +63,29 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
                 return νℓкhat.reply(`*😥Sorry:* _${νℓкуяє.pushname}_
 *❌ Error* 
 > There has been an API Error. Please try again later.`);
-              }
+              } else
+                await νℓкуяє.imgB(
+                  νℓкуяє,
+                  νℓкhat,
+                  `*🔖Here, ${pfname} For @${νℓкуяє.Tname || νℓкуяє.pushname}:*
+
+╔══☰ *❗ADULT❗*
+║⦁ 💡Title: ${mData.meta.title || null}
+║⦁ 🖊️Author: ${mData.meta.author || null}
+║⦁ ❣️Topic: ${mData.meta.topic || null}
+╚══☰
+╔══☰
+║>  *❓META INFO❓*
+║⦁ 🎊Status: ${mData.meta.status || null}
+║⦁ 🔐Uuid: ${mData.meta.uuid || null}
+║⦁ 🗓️Date_create: ${mData.meta.date_create || null}
+║⦁ 🧀Query: ${mData.meta.query || null}
+║⦁ 📢Domain: ${mData.meta.domain || null}
+║⦁ 💯Sub_reddit_id: ${mData.meta.sub_reddit_id || null}
+║⦁ 🌐Link: ${mData.meta.web_link || null}
+╚═══════⋑`,
+                  mData.meta.thumbnail
+                );
             });
         }
       }

@@ -11,10 +11,10 @@
 // ║ In short, Fork At Your Own Risk.
 // ╚════════════╝
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     νℓкуяє
@@ -29,7 +29,8 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
       })
       .then(async (response) => {
         var mData = response.data;
-        if (!mData.URL) {
+        console.log(mData);
+        if (!mData.meta.url) {
           await νℓкуяє.sendMessage(νℓкhat.chat, {
             react: {
               text: "❌",
@@ -43,9 +44,9 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
 > There has been an API Error. Please try again later.`
           );
         }
-        resp = mData._id + ".mp4";
+        resp = mData.resp.id + ".mp4";
         νℓкуяє.ffmpeg
-          .input(mData[0].URL)
+          .input(mData.meta.url)
           .outputOptions([
             "-pix_fmt yuv420p",
             "-c:v libx264",
@@ -79,8 +80,8 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
               let dataFor =
                 νℓкhat.mtype == "extendedTextMessage" &&
                 νℓкhat.message.extendedTextMessage.contextInfo != null
-                  ? νℓкhat.message.extendedTextMessage.contextInfo.participant ||
-                    ""
+                  ? νℓкhat.message.extendedTextMessage.contextInfo
+                      .participant || ""
                   : "";
               return await νℓкуяє
                 .sendMessage(

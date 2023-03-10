@@ -11,10 +11,10 @@
 // ║ In short, Fork At Your Own Risk.
 // ╚════════════╝
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     if (!νℓкуяє.args) {
@@ -47,22 +47,21 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
         },
       })
       .then(async (response) => {
-        const mData = response.data[0];
+        var mData = response.data;
+        console.log(mData);
         console.log(mData);
         return await νℓкуяє.imgB(
           νℓкуяє,
           νℓкhat,
           `*🔖Here, ${pfname} For ${νℓкуяє.pushname || νℓкуяє.Tname}:*
-*_topic*: ${mData._topic}
-*_query*: ${mData._query}
-*_width*: ${mData._width}
-*_height*: ${mData._height}
-*_color*: ${mData._color}
-*_description*: ${mData._description || null}
-*_alt_description*: ${mData._alt_description || null}
-
-*_download*: ${mData._links[0]._download}`,
-          mData._images[0]._raw
+*Topic*: ${mData.meta.topic}
+*Query*: ${mData.meta.query}
+*Width*: ${mData.meta.width}
+*Height*: ${mData.meta.height}
+*Color*: ${mData.meta.color}
+*Description*: ${mData.meta.description || null}
+*Alt-Desc*: ${mData.meta.alt_description || null}`,
+          mData.meta.images[0]._raw
         );
       });
     ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");

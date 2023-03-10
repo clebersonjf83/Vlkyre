@@ -11,10 +11,10 @@
 // ║ In short, Fork At Your Own Risk.
 // ╚════════════╝
 ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-ppath = require("path");
 require("../../global.js");
-psname = ppath.basename(__filename);
-pfname = psname.slice(0, -3).toLowerCase();
+const ppath = require("path");
+const psname = ppath.basename(__filename);
+const pfname = psname.slice(0, -3).toLowerCase();
 module.exports = async (νℓкуяє, νℓкhat, update, store) => {
   try {
     if (!νℓкуяє.args.join(" ")) {
@@ -35,13 +35,28 @@ module.exports = async (νℓкуяє, νℓкhat, update, store) => {
       );
     }
     ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
-    await νℓкуяє.imgB(
-      νℓкуяє,
-      νℓкhat,
-      `*🔖Here, ${pfname} For ${νℓкуяє.pushname || νℓкуяє.Tname}:*
-> ${await νℓкуяє.Tinyurl(νℓкуяє.args.join(" "))}`,
-      await νℓкуяє.akaneko.nsfw.ass()
-    );
+    νℓкуяє
+      .axios({
+        method: "get",
+        url:
+          "https://magneum.vercel.app/api/shorten?q=" + νℓкуяє.args.join(" "),
+        headers: {
+          accept: "*/*",
+          "accept-language": "en-US,en;q=0.9",
+          "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+      })
+      .then(async (response) => {
+        var mData = response.data;
+        console.log(mData);
+        await νℓкуяє.imgB(
+          νℓкуяє,
+          νℓкhat,
+          `*🔖Here, ${pfname} For ${νℓкуяє.pushname || νℓкуяє.Tname}:*
+> ${mData.meta.url}`,
+          await νℓкуяє.akaneko.nsfw.ass()
+        );
+      });
     ("◎☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱[ νℓкуяє вσт ву mågneum ]☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱☱◎");
   } catch (error) {
     return νℓкуяє.grab(νℓкуяє, νℓкhat, error);
